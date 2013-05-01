@@ -1,24 +1,24 @@
 module SportsDataApi
-  module Nfl
+  module Mlb
 
     class Exception < ::Exception
     end
 
-    DIR = File.join(File.dirname(__FILE__), 'nfl')
-    BASE_URL = 'http://api.sportsdatallc.org/nfl-%{access_level}%{version}'
+    DIR = File.join(File.dirname(__FILE__), 'mlb')
+    BASE_URL = 'http://api.sportsdatallc.org/mlb-%{access_level}%{version}'
 
-    autoload :Team,   File.join(DIR, 'team')
-    autoload :Game,   File.join(DIR, 'game')
-    autoload :Week,   File.join(DIR, 'week')
-    autoload :Season, File.join(DIR, 'season')
+    autoload :Event,   File.join(DIR, 'mlb_event')
+    # autoload :Game,   File.join(DIR, 'game')
+    # autoload :Week,   File.join(DIR, 'week')
+    autoload :Season, File.join(DIR, 'mlb_season')
 
     ##
-    # Fetches NFL season schedule for a given year and season.
-    def self.schedule(year, season, version = 1)
+    # Fetches MLB season schedule for a given year and season.
+    def self.schedule(year, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      season = season.to_s.upcase.to_sym
-      raise SportsDataApi::Nfl::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
-      url = "#{base_url}/#{year}/#{season}/schedule.xml"
+      #season = season.to_s.upcase.to_sym
+      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
+      url = "#{base_url}/schedule/#{year}.xml"
 
       # Perform the request
       response = self.generic_request(url)
@@ -26,13 +26,13 @@ module SportsDataApi
       # Load the XML and ignore namespaces in Nokogiri
       schedule = Nokogiri::XML(response.to_s)
       schedule.remove_namespaces!
-      puts schedule
-      return Season.new(schedule.xpath("/season"))
+      binding.pry
+      return Season.new(schedule.xpath("/calendars"))
     end
 
     ##
     #
-    def self.boxscore(year, season, week, home, away, version = 1)
+    def self.boxscore(year, season, week, home, away, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
       season = season.to_s.upcase.to_sym
       raise SportsDataApi::Nfl::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
@@ -40,6 +40,7 @@ module SportsDataApi
 
       # Perform the request
       response = self.generic_request(url)
+
 
       # Load the XML and ignore namespaces in Nokogiri
       boxscore = Nokogiri::XML(response.to_s)
@@ -51,7 +52,7 @@ module SportsDataApi
     private
     def self.generic_request(url)
       begin
-        return RestClient.get(url, params: { api_key: SportsDataApi.nfl_key })
+        return RestClient.get(url, params: { api_key: SportsDataApi.mlb_key })
       rescue RestClient::RequestTimeout => timeout
         raise SportsDataApi::Exception, 'The API did not respond in a reasonable amount of time'
       rescue RestClient::Exception => e

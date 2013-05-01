@@ -4,12 +4,21 @@ require "rest_client"
 require "time"
 
 module SportsDataApi
-  def self.key
+  def self.nfl_key
     @key ||= ''
     @key
   end
 
-  def self.key=(new_key)
+  def self.nfl_key=(new_key)
+    @key = new_key
+  end
+
+  def self.mlb_key
+    @key ||= ''
+    @key
+  end
+
+  def self.mlb_key=(new_key)
     @key = new_key
   end
 
@@ -26,4 +35,5 @@ module SportsDataApi
 
   autoload :Nfl,       File.join(LIBRARY_PATH, 'nfl')
   autoload :Exception, File.join(LIBRARY_PATH, 'exception')
+  autoload :Mlb,       File.join(LIBRARY_PATH, 'mlb')
 end
