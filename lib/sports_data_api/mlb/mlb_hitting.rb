@@ -1,7 +1,7 @@
 module SportsDataApi
   module Mlb
     class Hitting
-      attr_reader :season_id, :season_year, :events, :h
+      attr_reader :season_id, :season_year, :events, :hitting
 
       def initialize(xml, entity)
       
@@ -15,8 +15,8 @@ module SportsDataApi
         temp6 = temp.xpath("steal").first
         temp7 = temp.xpath("games").first
         
-        @h =  Hash.new(
-          entity.to_sym => {
+        @hitting =  Hash.new
+        @hitting = {entity.to_sym => {
             :ab => temp["ab"],
             :ap => temp["ap"],
             :avg => temp["avg"],
@@ -74,8 +74,8 @@ module SportsDataApi
             },
             :games => temp7["play"]
           }
-        )
-        return h
+        }
+        
       end
     end
 
