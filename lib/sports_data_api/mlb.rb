@@ -12,6 +12,9 @@ module SportsDataApi
     autoload :Hitting,   File.join(DIR, 'mlb_hitting')
     autoload :Pitching,   File.join(DIR, 'mlb_pitching')
     autoload :Season, File.join(DIR, 'mlb_season')
+    autoload :Player, File.join(DIR, 'mlb_player')
+    autoload :Team, File.join(DIR, 'mlb_team')
+    autoload :League, File.join(DIR, 'mlb_league')
 
     ##
     # Fetches MLB season schedule for a given year and season.
@@ -47,6 +50,23 @@ module SportsDataApi
       statistics.remove_namespaces!
       #binding.pry
       return Game.new(statistics.xpath("/statistics"))
+    end
+    ##
+    #
+    def self.team_rosters(year, version = 3)
+      base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
+      #season = season.to_s.upcase.to_sym
+      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
+      url = "#{base_url}/rosters/#{year}.xml"
+
+      # Perform the request
+      response = self.generic_request(url)
+
+      # Load the XML and ignore namespaces in Nokogiri
+      teams = Nokogiri::XML(response.to_s)
+      teams.remove_namespaces!
+      #binding.pry
+      return League.new(teams.xpath("/rosters"))
     end
     ##
     #
