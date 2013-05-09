@@ -10,6 +10,7 @@ module SportsDataApi
     autoload :Event,   File.join(DIR, 'mlb_event')
     autoload :Game,   File.join(DIR, 'mlb_game')
     autoload :Hitting,   File.join(DIR, 'mlb_hitting')
+    autoload :Pitching,   File.join(DIR, 'mlb_pitching')
     autoload :Season, File.join(DIR, 'mlb_season')
 
     ##

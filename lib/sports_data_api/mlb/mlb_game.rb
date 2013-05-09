@@ -1,7 +1,7 @@
 module SportsDataApi
   module Mlb
     class Game
-      attr_reader :id, :season_type, :status, :visitor, :visitor_hitting, :home, :home_hitting
+      attr_reader :id, :season_type, :status, :visitor, :visitor_hitting, :visitor_pitching, :home, :home_hitting, :home_pitching
 
       def initialize(xml)
         @visitor_hitting = []
@@ -16,16 +16,22 @@ module SportsDataApi
           end
           @visitor_hitting.unshift(Hitting.new(xml.xpath("visitor").xpath("hitting").xpath("team").first,"visitor"))
           
+          @visitor_pitching = xml.xpath("visitor").xpath("pitching").xpath("players").xpath("player").map do |xml_player|
+            Pitching.new(xml_player, "player")
+          end
+          @visitor_pitching.unshift(Pitching.new(xml.xpath("visitor").xpath("pitching").xpath("team").first,"visitor"))
+
           @home = xml.xpath("home").first["id"]
           @home_hitting = xml.xpath("home").xpath("hitting").xpath("players").xpath("player").map do |xml_player|
             Hitting.new(xml_player, "player")
           end
-          
           @home_hitting.unshift(Hitting.new(xml.xpath("home").xpath("hitting").xpath("team").first,"home"))
-          #@visitor_hitting = Hitting.new(xml,"visitor")
-          #@home = Home.new(xml.xpath("home").first["id"])
-          #@home_team_hitting = hitting(xml,"home")
-      # Refactor to a 'hitting' method
+
+          @home_pitching = xml.xpath("home").xpath("pitching").xpath("players").xpath("player").map do |xml_player|
+            Pitching.new(xml_player, "player")
+          end
+          @home_pitching.unshift(Pitching.new(xml.xpath("home").xpath("pitching").xpath("team").first,"home"))
+         
         end
       end
       
