@@ -33,10 +33,7 @@ module SportsDataApi
           @home_pitching.unshift(Pitching.new(xml.xpath("home").xpath("pitching").xpath("team").first,"home"))
          
         end
-      end
-      
-
-      
+      end  
     end
   end
 end

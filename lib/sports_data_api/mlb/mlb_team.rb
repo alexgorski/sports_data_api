@@ -15,7 +15,6 @@ module SportsDataApi
           @division = xml['division']
           @venue = xml['venue']
           @players = xml.xpath("players").xpath("profile").map do |player_xml|
-        
             Player.new(player_xml)
           end
         end

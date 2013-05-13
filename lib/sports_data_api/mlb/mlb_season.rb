@@ -19,7 +19,7 @@ module SportsDataApi
       end
       ##
       # Check if the requested season is a valid
-      # NFL season type.
+      # MLB season type.
       #
       # The only valid types are: :PRE, :REG, :PST
       def self.valid?(season)

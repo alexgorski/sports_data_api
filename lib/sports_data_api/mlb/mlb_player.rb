@@ -21,9 +21,7 @@ module SportsDataApi
           @birthcity = xml.xpath('birthcity').text
           @birthstate = xml.xpath('last').text
           @birthcountry = xml.xpath('birthcountry').text
-          @pro_debut =  xml.xpath('pro_debut').text
-          
-          
+          @pro_debut =  xml.xpath('pro_debut').text    
         end
       end
 
