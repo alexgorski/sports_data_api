@@ -71,6 +71,25 @@ module SportsDataApi
     ##
     #
 
+    def self.season_stats(year, version=3)
+      base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
+      #season = season.to_s.upcase.to_sym
+      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
+      url = "#{base_url}/seasontd/players/#{year}.xml"
+
+      # Perform the request
+      response = self.generic_request(url)
+
+      # Load the XML and ignore namespaces in Nokogiri
+      season_stats = Nokogiri::XML(response.to_s)
+      season_stats.remove_namespaces!
+      season_stats = season_stats.xpath("/statistics").first.xpath("player")
+      
+      
+      #return Season.new(schedule.xpath("/statistics"))
+    end
+    ##
+    #
 
     def self.boxscore(year, season, week, home, away, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }

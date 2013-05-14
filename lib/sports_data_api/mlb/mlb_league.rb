@@ -4,6 +4,7 @@ module SportsDataApi
       attr_reader :season_id, :season_year, :teams, :sport
 
       def initialize(xml)
+        season_stats = SportsDataApi::Mlb.season_stats(xml.first["season_year"])
         
         @teams = []
         if xml.is_a? Nokogiri::XML::NodeSet
