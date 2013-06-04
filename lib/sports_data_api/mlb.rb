@@ -7,14 +7,14 @@ module SportsDataApi
     DIR = File.join(File.dirname(__FILE__), 'mlb')
     BASE_URL = 'http://api.sportsdatallc.org/mlb-%{access_level}%{version}'
 
-    autoload :Event,   File.join(DIR, 'mlb_event')
-    autoload :Game,   File.join(DIR, 'mlb_game')
-    autoload :Hitting,   File.join(DIR, 'mlb_hitting')
-    autoload :Pitching,   File.join(DIR, 'mlb_pitching')
-    autoload :Season, File.join(DIR, 'mlb_season')
-    autoload :Player, File.join(DIR, 'mlb_player')
-    autoload :Team, File.join(DIR, 'mlb_team')
-    autoload :League, File.join(DIR, 'mlb_league')
+    autoload :Event,   File.join(DIR, 'event')
+    autoload :Game,   File.join(DIR, 'game')
+    autoload :Hitting,   File.join(DIR, 'hitting')
+    autoload :Pitching,   File.join(DIR, 'pitching')
+    autoload :Season, File.join(DIR, 'season')
+    autoload :Player, File.join(DIR, 'player')
+    autoload :Team, File.join(DIR, 'team')
+    autoload :League, File.join(DIR, 'league')
 
     ##
     # Fetches MLB season schedule for a given year and season.
