@@ -8,7 +8,7 @@ module SportsDataApi
           @id = xml["id"]
           @season_type = xml["season_type"].to_sym
           @status = xml["status"]
-          @visitor = xml.xpath("visitor").first["id"]
+          @visitor = xml["visitor"]
           @home = xml["home"]
           @venue = xml["venue"]
           @broadcast_network = xml.xpath("broadcast").first["network"] 
