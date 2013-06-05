@@ -13,6 +13,7 @@ module SportsDataApi
         temp4 = temp.xpath("outcome").first
         temp5 = temp.xpath("outs").first
         temp6 = temp.xpath("steal").first
+        
         temp.xpath("games").first != nil ? 
         temp7 = temp.xpath("games").first : 
         temp7 = {:play => nil,

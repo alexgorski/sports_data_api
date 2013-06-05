@@ -20,10 +20,10 @@ describe SportsDataApi::Mlb::Game, vcr: {
     its(:home) { should eq '' }
     its(:visitor) { should eq '' }
     its(:status) { should eq '' }
-    its(:home_hitting) { should be_an_instance_of(SportsDataApi::Mlb::Hitting) }
-    its(:home_pitching) { should be_an_instance_of(SportsDataApi::Mlb::Pitching) }
-    its(:visitor_hitting) { should be_an_instance_of(SportsDataApi::Mlb::Hitting) }
-    its(:visitor_pitching) { should be_an_instance_of(SportsDataApi::Mlb::Pitching) }
+    its(:home_hitting) { should have_at_least(10).hitting }
+    its(:home_pitching) { should have_at_least(2).pitching) }
+    its(:visitor_hitting) { should have_at_least(10).hitting }
+    its(:visitor_pitching) { should have_at_least(2).pitching) }
   end
-  context 'results from '
+  #context 'results from '
 end
