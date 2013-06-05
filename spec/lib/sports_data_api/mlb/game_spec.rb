@@ -8,7 +8,7 @@ describe SportsDataApi::Mlb::Game, vcr: {
   let(:game) do
     SportsDataApi.mlb_key = api_key
     SportsDataApi.access_level = 't'
-    SportsDataApi::Mlb.game_stats('event_id')
+    SportsDataApi::Mlb.game_stats('insert_event_id')
   end
   context 'results from game_stats fetch' do
     subject { game }
