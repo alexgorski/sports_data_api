@@ -10,7 +10,7 @@ describe SportsDataApi::Mlb::Team, vcr: {
     SportsDataApi.access_level = 't'
     SportsDataApi::Mlb.team_rosters(2013)
   end
-  describe 'home team' do
+  describe 'team' do
     subject { team_rosters.teams.first }
     it { should be_an_instance_of(SportsDataApi::Mlb::Team) }
     its(:id) { should eq '' }
