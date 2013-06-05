@@ -4,7 +4,6 @@ module SportsDataApi
       attr_reader :id, :season_type, :status, :visitor, :visitor_hitting, :visitor_pitching, :home, :home_hitting, :home_pitching
 
       def initialize(xml)
-        @visitor_hitting = []
         xml = xml.first if xml.is_a? Nokogiri::XML::NodeSet
         if xml.is_a? Nokogiri::XML::Element
           @id = xml["id"]
