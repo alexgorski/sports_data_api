@@ -19,7 +19,7 @@ module SportsDataApi
           @height = xml.xpath('height').text
           @birthdate = xml.xpath('birthdate').text
           @birthcity = xml.xpath('birthcity').text
-          @birthstate = xml.xpath('last').text
+          @birthstate = xml.xpath('birthstate').text
           @birthcountry = xml.xpath('birthcountry').text
           @pro_debut =  xml.xpath('pro_debut').text    
         end

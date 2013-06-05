@@ -36,7 +36,7 @@ describe SportsDataApi::Mlb::League, vcr: {
       it { should be_an_instance_of(SportsDataApi::Mlb::League) }
       its(:sport) { should eq "Mlb" }
       its(:season_year) { should eq 2013 }
-      its(:season_id) { should eq '' }
-      its(:teams) { should have(30).teams }
+      its(:season_id) { should eq '58dd9a81-4a38-4a66-8cd7-32ae4d567ba8' }
+      its(:teams) { should have_at_least(30).teams }
   end
 end

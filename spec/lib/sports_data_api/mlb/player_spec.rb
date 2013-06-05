@@ -13,21 +13,21 @@ describe SportsDataApi::Mlb::Player, vcr: {
   describe 'player' do
     subject { team_rosters.teams.first.players.first }
     it { should be_an_instance_of(SportsDataApi::Mlb::Player) }
-    its(:id) { should eq '' }
-    its(:status) { should eq '' }
-    its(:jersey) { should eq '' }
-    its(:position) { should eq '' }
-    its(:mlbam_id) { should eq '' }
-    its(:first_name) { should eq '' }
-    its(:last_name { should eq '' }
-    its(:bat_hand { should eq '' }
-    its(:throw_hand { should eq '' }
-    its(:weight { should eq '' }
-    its(:height { should eq '' }
-    its(:birthdate { should eq '' }
-    its(:birthcity { should eq '' }
-    its(:birthstate { should eq '' }        
-    its(:birthcountry { should eq '' }
-    its(:pro_debut { should eq '' }
+    its(:id) { should eq '10154eef-8834-48e0-97e7-d7436367534c' }
+    its(:status) { should eq 'A' }
+    its(:jersey) { should eq 23 }
+    its(:position) { should eq '1B' }
+    its(:mlbam_id) { should eq '408236' }
+    its(:first_name) { should eq 'Adrian' }
+    its(:last_name { should eq 'Gonzalez' }
+    its(:bat_hand { should eq 'L' }
+    its(:throw_hand { should eq 'L' }
+    its(:weight { should eq '602' }
+    its(:height { should eq '225' }
+    its(:birthdate { should eq '1982-05-08' }
+    its(:birthcity { should eq 'San Diego' }
+    its(:birthstate { should eq 'CA' }        
+    its(:birthcountry { should eq 'USA' }
+    its(:pro_debut { should eq '2004-04-18' }
   end
 end
