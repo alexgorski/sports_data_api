@@ -5,7 +5,8 @@ describe SportsDataApi do
     let(:key) { "testing_key123" }
     let(:level) { "b" }
     before(:each) do
-      SportsDataApi.key = key
+      SportsDataApi.nfl_key = key
+      SportsDataApi.mlb_key = key
       SportsDataApi.access_level = level
     end
     its(:key) { should eq key }

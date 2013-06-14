@@ -17,8 +17,6 @@ module SportsDataApi
     # Fetches MLB season schedule for a given year and season.
     def self.schedule(year, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      #season = season.to_s.upcase.to_sym
-      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
       url = "#{base_url}/schedule/#{year}.xml"
 
       # Perform the request
@@ -35,8 +33,6 @@ module SportsDataApi
     #
     def self.team_rosters(year, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      #season = season.to_s.upcase.to_sym
-      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
       url = "#{base_url}/rosters/#{year}.xml"
 
       # Perform the request
@@ -45,7 +41,7 @@ module SportsDataApi
       # Load the XML and ignore namespaces in Nokogiri
       teams = Nokogiri::XML(response.to_s)
       teams.remove_namespaces!
-      #binding.pry
+
       return League.new(teams.xpath("/rosters"))
     end
 

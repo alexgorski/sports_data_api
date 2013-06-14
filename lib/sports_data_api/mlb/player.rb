@@ -4,7 +4,6 @@ module SportsDataApi
       attr_reader :status, :jersey, :position, :id, :mlbam_id, :first_name, :last_name, :bat_hand, :throw_hand, :weight, :height, :birthday, :birthcity, :birthstate, :birthcountry, :pro_debut 
 
       def initialize(xml)
-       
         if xml.is_a? Nokogiri::XML::Element
           @status = xml["status"]
           @jersey = xml["jersey"].to_i
@@ -23,18 +22,6 @@ module SportsDataApi
           @birthcountry = xml.xpath('birthcountry').text
           @pro_debut =  xml.xpath('pro_debut').text    
         end
-      end
-
-      def self.valid?(season)
-
-      end
-      ##
-      # Check if the requested season is a valid
-      # NFL season type.
-      #
-      # The only valid types are: :PRE, :REG, :PST
-      def self.valid?(season)
-        [:PRE, :REG, :PST].include?(season)
       end
     end
   end
