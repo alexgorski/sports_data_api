@@ -4,8 +4,6 @@ module SportsDataApi
       attr_reader :season_id, :season_year, :teams, :sport
 
       def initialize(xml)
-        #season_stats = SportsDataApi::Mlb.season_stats(xml.first["season_year"])
-        
         @teams = []
         if xml.is_a? Nokogiri::XML::NodeSet
           @sport = "Mlb"
@@ -15,18 +13,6 @@ module SportsDataApi
             Team.new(team_xml)
           end
         end
-      end
-
-      def self.valid?(season)
-
-      end
-      ##
-      # Check if the requested season is a valid
-      # MLB season type.
-      #
-      # The only valid types are: :PRE, :REG, :PST
-      def self.valid?(season)
-        [:PRE, :REG, :PST].include?(season)
       end
     end
   end

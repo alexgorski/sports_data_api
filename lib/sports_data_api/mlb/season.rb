@@ -13,18 +13,6 @@ module SportsDataApi
           end
         end
       end
-
-      def self.valid?(season)
-
-      end
-      ##
-      # Check if the requested season is a valid
-      # MLB season type.
-      #
-      # The only valid types are: :PRE, :REG, :PST
-      def self.valid?(season)
-        [:PRE, :REG, :PST].include?(season)
-      end
     end
   end
 end

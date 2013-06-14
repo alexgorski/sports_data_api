@@ -8,9 +8,6 @@ module SportsDataApi
     BASE_URL = 'http://api.sportsdatallc.org/mlb-%{access_level}%{version}'
 
     autoload :Event,   File.join(DIR, 'event')
-    autoload :Game,   File.join(DIR, 'game')
-    autoload :Hitting,   File.join(DIR, 'hitting')
-    autoload :Pitching,   File.join(DIR, 'pitching')
     autoload :Season, File.join(DIR, 'season')
     autoload :Player, File.join(DIR, 'player')
     autoload :Team, File.join(DIR, 'team')
@@ -36,23 +33,6 @@ module SportsDataApi
 
     ##
     #
-    def self.game_stats(event_id, version = 3)
-      base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      #season = season.to_s.upcase.to_sym
-      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
-      url = "#{base_url}/statistics/#{event_id}.xml"
-
-      # Perform the request
-      response = self.generic_request(url)
-
-      # Load the XML and ignore namespaces in Nokogiri
-      statistics = Nokogiri::XML(response.to_s)
-      statistics.remove_namespaces!
-      #binding.pry
-      return Game.new(statistics.xpath("/statistics"))
-    end
-    ##
-    #
     def self.team_rosters(year, version = 3)
       base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
       #season = season.to_s.upcase.to_sym
@@ -68,45 +48,9 @@ module SportsDataApi
       #binding.pry
       return League.new(teams.xpath("/rosters"))
     end
+
     ##
     #
-
-    def self.season_stats(year, version=3)
-      base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      #season = season.to_s.upcase.to_sym
-      #raise SportsDataApi::Mlb::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
-      url = "#{base_url}/seasontd/players/#{year}.xml"
-
-      # Perform the request
-      response = self.generic_request(url)
-
-      # Load the XML and ignore namespaces in Nokogiri
-      season_stats = Nokogiri::XML(response.to_s)
-      season_stats.remove_namespaces!
-      season_stats = season_stats.xpath("/statistics").first.xpath("player")
-      
-      
-      #return Season.new(schedule.xpath("/statistics"))
-    end
-    ##
-    #
-
-    def self.boxscore(year, season, week, home, away, version = 3)
-      base_url = BASE_URL % { access_level: SportsDataApi.access_level, version: version }
-      season = season.to_s.upcase.to_sym
-      raise SportsDataApi::Nfl::Exception.new("#{season} is not a valid season") unless Season.valid?(season)
-      url = "#{base_url}/#{year}/#{season}/#{week}/#{away}/#{home}/boxscore.xml"
-
-      # Perform the request
-      response = self.generic_request(url)
-
-
-      # Load the XML and ignore namespaces in Nokogiri
-      boxscore = Nokogiri::XML(response.to_s)
-      boxscore.remove_namespaces!
-
-      return Game.new(boxscore.xpath("/game"))
-    end
 
     private
     def self.generic_request(url)

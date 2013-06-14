@@ -8,7 +8,7 @@ describe SportsDataApi::Nfl, vcr: {
 
   context 'invalid API key' do
     before(:each) do
-      SportsDataApi.key = 'invalid_key'
+      SportsDataApi.nfl_key = 'invalid_key'
       SportsDataApi.access_level = 't'
     end
     describe '.schedule' do
@@ -33,7 +33,7 @@ describe SportsDataApi::Nfl, vcr: {
     let(:schedule_url) { 'http://api.sportsdatallc.org/nfl-t1/2012/REG/schedule.xml' }
     let(:boxscore_url) { 'http://api.sportsdatallc.org/nfl-t1/2012/REG/9/MIA/IND/boxscore.xml' }
     before(:each) do
-      SportsDataApi.key = 'invalid_key'
+      SportsDataApi.nfl_key = 'invalid_key'
       SportsDataApi.access_level = 't'
       @schedule_xml = RestClient.get("#{schedule_url}?api_key=#{api_key}")
       @boxscore_xml = RestClient.get("#{boxscore_url}?api_key=#{api_key}")
@@ -48,7 +48,7 @@ describe SportsDataApi::Nfl, vcr: {
 
     describe '.boxscore' do
       it 'creates a valid Sports Data LLC url' do
-        params = { params: { api_key: SportsDataApi.key } }
+        params = { params: { api_key: SportsDataApi.nfl_key } }
         RestClient.should_receive(:get).with(boxscore_url, params).and_return(@boxscore_xml)
         subject.boxscore(2012, :REG, 9, 'IND', 'MIA')
       end
