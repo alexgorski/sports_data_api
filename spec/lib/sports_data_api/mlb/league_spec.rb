@@ -6,26 +6,6 @@ describe SportsDataApi::Mlb::League, vcr: {
     match_requests_on: [:host, :path]
 } do
   subject { SportsDataApi::Mlb::League }
-  describe '.league?' do
-    context :PRE do
-      it { SportsDataApi::Mlb::League.valid?(:PRE).should be_true }
-    end
-    context :REG do
-      it { subject.valid?(:REG).should be_true }
-    end
-    context :PST do
-      it { subject.valid?(:PST).should be_true }
-    end
-    context :pre do
-      it { subject.valid?(:pre).should be_false }
-    end
-    context :reg do
-      it { subject.valid?(:reg).should be_false }
-    end
-    context :pst do
-      it { subject.valid?(:pst).should be_false }
-    end
-  end
   context 'results from team_rosters fetch' do
       let(:league) do
         SportsDataApi.access_level = 't'
